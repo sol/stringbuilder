@@ -16,7 +16,7 @@
 -- >   "baz"
 --
 -- `return` and `>>=` are not useful in this context!
-module Data.String.Builder (build) where
+module Data.String.Builder (build, Builder) where
 
 import Prelude hiding (undefined)
 import Data.String
