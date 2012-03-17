@@ -23,3 +23,17 @@ library
     , transformers
   exposed-modules:
       Data.String.Builder
+
+test-suite spec
+  type:
+      exitcode-stdio-1.0
+  main-is:
+      Spec.hs
+  ghc-options:
+      -Wall -Werror
+  hs-source-dirs:
+      src, test
+  build-depends:
+      base
+    , transformers
+    , hspec-shouldbe
