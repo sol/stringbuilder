@@ -9,6 +9,10 @@ maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
 cabal-version:    >= 1.2
 
+source-repository head
+  type: git
+  location: https://github.com/sol/stringbuilder
+
 library
   ghc-options:
       -Wall
