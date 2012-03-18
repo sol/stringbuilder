@@ -1,7 +1,9 @@
 language: haskell
 
 install:
-    - cabal update && cabal install --enable-tests
+    - cabal update
+    - cabal install hspec-shouldbe
+    - cabal install --enable-tests
 
 script:
     - cabal test
