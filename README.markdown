@@ -26,7 +26,7 @@ one of the following options first.
            \help\n\
            \message\n"
 
-### Using `unlines` to construct multi-line string literals
+### Using unlines to construct multi-line string literals
 
     help = unlines [
         "some"

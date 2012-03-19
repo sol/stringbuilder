@@ -3,8 +3,6 @@
 -- `build` can be used to construct multi-line string literals in a monadic
 -- way.
 --
--- Here is an example:
---
 -- > {-# LANGUAGE OverloadedStrings #-}
 -- >
 -- > import Data.String.Builder
