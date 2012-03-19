@@ -14,7 +14,8 @@
       "baz"
 
 This is primarily meant for test suites that use a lot of multi-line string
-literals.
+literals.  And when it really matters that the syntax is as easy on the eyes as
+it can get.
 
 If you need just a few multi-line string literals in production code consider
 one of the following options first.
