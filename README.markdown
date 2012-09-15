@@ -3,8 +3,6 @@
 `build` can be used to construct multi-line string literals in a monadic way.
 
     {-# LANGUAGE OverloadedStrings #-}
-    {-# OPTIONS_GHC -fno-warn-unused-do-bind #-}
-
     import Data.String.Builder
 
     str :: String
