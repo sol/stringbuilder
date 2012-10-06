@@ -19,7 +19,7 @@ module Data.String.Builder (build, Builder, BuilderM) where
 import Data.String
 import Control.Monad.Trans.Writer
 
-newtype BuilderM a = BuilderM { runBuilderM :: Writer String a }
+newtype BuilderM a = BuilderM {runBuilderM :: Writer String a}
   deriving Monad
 
 type Builder = BuilderM ()
@@ -31,4 +31,4 @@ instance (a ~ ()) => IsString (BuilderM a) where
   fromString s = literal s >> literal "\n" >> return ()
 
 build :: Builder -> String
-build = snd . runWriter . runBuilderM
+build = execWriter . runBuilderM
