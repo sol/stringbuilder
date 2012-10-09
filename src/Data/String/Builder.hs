@@ -18,20 +18,21 @@ module Data.String.Builder (build, Builder, BuilderM) where
 
 import Data.String
 
-data BuilderM a = BuilderM a String
+-- a writer monad
+data BuilderM a = BuilderM a ShowS
 
 instance Monad BuilderM where
-  return a             = BuilderM a ""
+  return a            = BuilderM a id
   BuilderM a xs >>= f = case f a of
-    BuilderM b ys -> BuilderM b (xs ++ ys)
+    BuilderM b ys -> BuilderM b (xs . ys)
 
 type Builder = BuilderM ()
 
 literal :: String -> Builder
-literal = BuilderM ()
+literal = BuilderM () . showString
 
 instance (a ~ ()) => IsString (BuilderM a) where
-  fromString s = literal s >> literal "\n" >> return ()
+  fromString s = literal s >> literal "\n"
 
 build :: Builder -> String
-build (BuilderM () s) = s
+build (BuilderM () s) = s ""
