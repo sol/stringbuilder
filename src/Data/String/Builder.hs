@@ -1,4 +1,4 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving, GADTs #-}
+{-# LANGUAGE GADTs #-}
 -- |
 -- `build` can be used to construct multi-line string literals in a monadic
 -- way.
@@ -17,18 +17,21 @@
 module Data.String.Builder (build, Builder, BuilderM) where
 
 import Data.String
-import Control.Monad.Trans.Writer
 
-newtype BuilderM a = BuilderM {runBuilderM :: Writer String a}
-  deriving Monad
+data BuilderM a = BuilderM a String
+
+instance Monad BuilderM where
+  return a             = BuilderM a ""
+  BuilderM a xs >>= f = case f a of
+    BuilderM b ys -> BuilderM b (xs ++ ys)
 
 type Builder = BuilderM ()
 
 literal :: String -> Builder
-literal = BuilderM . tell
+literal = BuilderM ()
 
 instance (a ~ ()) => IsString (BuilderM a) where
   fromString s = literal s >> literal "\n" >> return ()
 
 build :: Builder -> String
-build = execWriter . runBuilderM
+build (BuilderM () s) = s
