@@ -1,7 +1,7 @@
 {-# LANGUAGE GADTs #-}
 -- |
--- `build` can be used to construct multi-line string literals in a monadic
--- way.
+-- The `build` function can be used to construct multi-line string literals in
+-- a monadic way:
 --
 -- > {-# LANGUAGE OverloadedStrings #-}
 -- >
@@ -12,13 +12,18 @@
 -- >   "foo"
 -- >   "bar"
 -- >   "baz"
---
--- `return` and `>>=` are not useful in this context!
-module Data.String.Builder (build, Builder, BuilderM) where
+module Data.String.Builder (
+-- * Functions
+  build
+, literal
+-- * Types
+, Builder
+, BuilderM
+) where
 
 import Data.String
 
--- a writer monad
+-- | A writer monad for string literals.
 data BuilderM a = BuilderM a ShowS
 
 instance Monad BuilderM where
@@ -28,11 +33,13 @@ instance Monad BuilderM where
 
 type Builder = BuilderM ()
 
+-- | Add a literal string.
 literal :: String -> Builder
 literal = BuilderM () . showString
 
 instance (a ~ ()) => IsString (BuilderM a) where
   fromString s = literal s >> literal "\n"
 
+-- | Run a builder.
 build :: Builder -> String
 build (BuilderM () s) = s ""
