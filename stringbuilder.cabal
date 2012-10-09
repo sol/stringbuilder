@@ -1,5 +1,5 @@
 name:             stringbuilder
-version:          0.2.0
+version:          0.3.0
 synopsis:         A monadic builder for multi-line string literals
 description:      <https://github.com/sol/stringbuilder#readme>
 category:         Testing
