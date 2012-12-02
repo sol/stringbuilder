@@ -1,4 +1,4 @@
-{-# LANGUAGE GADTs #-}
+{-# LANGUAGE TypeFamilies #-}
 -- |
 -- The `build` function can be used to construct multi-line string literals in
 -- a monadic way:
