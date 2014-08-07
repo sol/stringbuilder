@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE DeriveFunctor, TypeFamilies #-}
 -- |
 -- The `build` function can be used to construct multi-line string literals in
 -- a monadic way:
@@ -21,10 +21,17 @@ module Data.String.Builder (
 , BuilderM
 ) where
 
-import Data.String
+import           Control.Applicative
+import           Control.Monad
+import           Data.String
 
 -- | A writer monad for string literals.
 data BuilderM a = BuilderM a ShowS
+  deriving Functor
+
+instance Applicative BuilderM where
+  pure = return
+  (<*>) = ap
 
 instance Monad BuilderM where
   return a            = BuilderM a id
