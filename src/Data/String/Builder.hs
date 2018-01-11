@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveFunctor, TypeSynonymInstances, FlexibleInstances, TypeFamilies #-}
+{-# LANGUAGE CPP, DeriveFunctor, TypeSynonymInstances, FlexibleInstances, TypeFamilies #-}
 -- |
 -- The `build` function can be used to construct multi-line string literals in
 -- a monadic way:
@@ -43,7 +43,12 @@ type Builder = BuilderM ()
 
 instance Monoid Builder where
   mempty = return ()
-  a `mappend` b = a >> b
+#if !MIN_VERSION_base(4,11,0)
+  mappend = (>>)
+#else
+instance Semigroup Builder where
+  (<>) = (>>)
+#endif
 
 -- | Add a literal string.
 literal :: String -> Builder
