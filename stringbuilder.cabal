@@ -5,7 +5,7 @@ description:      <https://github.com/sol/stringbuilder#readme>
 category:         Testing
 license:          MIT
 license-file:     LICENSE
-copyright:        (c) 2011-2014 Simon Hengel
+copyright:        (c) 2011-2018 Simon Hengel
 author:           Simon Hengel <sol@typeful.net>
 maintainer:       Simon Hengel <sol@typeful.net>
 build-type:       Simple
